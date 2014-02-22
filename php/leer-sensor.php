@@ -12,9 +12,9 @@ $request = $client->get('/tesis/sensor/32/valor');
 // You must send a request in order for the transfer to occur
 $response = $request->send();
 
-echo $response->getBody() . "\n";
-
-// $data = $response->json();
-// echo $data['type'];
+echo "Respuesta del servidor: " . $response->getBody() . "\n";
+$obj = $response->json();
+echo " - Sensor: " . $obj['idSensor'] . "\n";
+echo " - Valor: " . $obj['valor'] . "\n";
 
 ?>

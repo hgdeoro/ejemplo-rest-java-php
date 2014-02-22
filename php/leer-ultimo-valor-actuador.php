@@ -13,13 +13,8 @@ $request = $client->get('/tesis/actuador/32/valor');
 $response = $request->send();
 
 echo "Respuesta del servidor: " . $response->getBody() . "\n";
-
-$obj = json_decode($response->getBody());
-
-echo " - Actuador: " . $obj->idActuador . "\n";
-echo " - Valor: " . $obj->valor . "\n";
-
-// $data = $response->json();
-// echo $data['type'];
+$obj = $response->json();
+echo " - Actuador: " . $obj['idActuador'] . "\n";
+echo " - Valor: " . $obj['valor'] . "\n";
 
 ?>
