@@ -1,6 +1,7 @@
 package com.example;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,7 @@ public class ConcurrentAccessTest {
 	public void testAccesoConcurrente() throws InterruptedException {
 		List<Thread> threads = new ArrayList<Thread>();
 		final AtomicInteger threadsListos = new AtomicInteger();
+		final AtomicInteger threadsFinalizadosOk = new AtomicInteger();
 		final Semaphore semaphore = new Semaphore(0);
 
 		for (int i = 0; i < 30; i++) {
@@ -81,6 +83,7 @@ public class ConcurrentAccessTest {
 					log("Respuesta recibida");
 					assertTrue(responseMsg.contains("Lectura de sensor '" + sensorId + "' devolvio"));
 
+					threadsFinalizadosOk.incrementAndGet();
 				}
 			}));
 		}
@@ -109,5 +112,8 @@ public class ConcurrentAccessTest {
 		}
 
 		log("Fin!");
+
+		assertEquals(30, threadsFinalizadosOk.get());
+
 	}
 }
