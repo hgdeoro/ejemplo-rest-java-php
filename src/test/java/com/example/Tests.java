@@ -1,6 +1,5 @@
 package com.example;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -23,16 +22,24 @@ public class Tests extends BaseTest {
 
 		Map<String, String> obj = new Gson().fromJson(responseMsg, type);
 
-		// assertTrue(responseMsg.contains("Lectura de sensor '33' devolvio"));
 		assertEquals(obj.get("idSensor"), "33");
 		assertNotNull(obj.get("valor"));
 		Integer.parseInt(obj.get("valor"));
 	}
 
 	@Test
-	public void testEscrituraSensor() {
+	public void testEscrituraActuador() {
 		String responseMsg = target.path("/actuador/12/valor").queryParam("value", "77").request()
 				.post(null, String.class);
-		assertTrue(responseMsg.contains("Escritura del valor '77' en actuador '12': OK"));
+
+		Type type = new TypeToken<Map<String, String>>() {
+		}.getType();
+
+		Map<String, String> obj = new Gson().fromJson(responseMsg, type);
+
+		assertEquals(obj.get("idActuador"), "12");
+		assertNotNull(obj.get("valor"));
+		assertEquals(Integer.parseInt(obj.get("valor")), 77);
+
 	}
 }

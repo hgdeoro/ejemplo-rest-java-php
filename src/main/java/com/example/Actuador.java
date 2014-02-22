@@ -24,13 +24,13 @@ public class Actuador {
 
 	@POST
 	@Path("/valor")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String escribirEnActuador(@PathParam("id_actaudor") String idActuador,
+	@Produces(MediaType.APPLICATION_JSON)
+	public JsonObject escribirEnActuador(@PathParam("id_actaudor") String idActuador,
 			@QueryParam("value") String value) {
 		Integer idActuadorInt = Integer.parseInt(idActuador);
 		Integer valueInt = Integer.parseInt(value);
 		this.arduino.cambiarActuador(idActuadorInt.intValue(), valueInt.intValue());
-		return "Escritura del valor '" + value + "' en actuador '" + idActuador + "': OK";
+		return Json.createObjectBuilder().add("idActuador", idActuadorInt).add("valor", valueInt).build();
 	}
 
 	@GET
@@ -39,7 +39,6 @@ public class Actuador {
 	public JsonObject obtenerValorDeActuador(@PathParam("id_actaudor") String idActuador) {
 		Integer idActuadorInt = Integer.parseInt(idActuador);
 		Integer valor = this.arduino.leerActuador(idActuadorInt.intValue());
-
 		return Json.createObjectBuilder().add("idActuador", idActuadorInt).add("valor", valor).build();
 	}
 
