@@ -6,6 +6,14 @@ Para facilitar el tema de las dependencias, uso Maven. Para que Maven instale to
 
     mvn install
 
+Si se agregan dependencias, para que Maven agregue las librerias en Eclipse, hay que ejecutar:
+
+    mvn eclipse:eclipse
+
+Y para ejecutar los tests:
+
+    mvn test
+
 ## Recursos
 
 + http://www.vogella.com/tutorials/REST/article.html
