@@ -29,11 +29,15 @@ public class Actuador {
 	public JsonObject escribirEnActuador(@PathParam("id_actaudor") String idActuador, JsonObject body) {
 		try {
 			Integer idActuadorInt = Integer.parseInt(idActuador);
-			// Integer valueInt =
-			// Integer.parseInt(body.get("valor").toString());
-			Integer valueInt = body.getInt("valor");
+			Integer valueInt = Integer.parseInt(body.getString("valor"));
 			this.arduino.cambiarActuador(idActuadorInt.intValue(), valueInt.intValue());
-			return Json.createObjectBuilder().add("idActuador", idActuadorInt).add("valor", valueInt).build();
+			//
+			// SIEMPRE RECORDAR devolver key-values de JSON como Strings. Esto
+			// hace falta porque en Java, estos valores los leeremos con
+			// un Map<String,String>.
+			//
+			return Json.createObjectBuilder().add("idActuador", idActuadorInt.toString())
+					.add("valor", valueInt.toString()).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -46,7 +50,8 @@ public class Actuador {
 	public JsonObject obtenerValorDeActuador(@PathParam("id_actaudor") String idActuador) {
 		Integer idActuadorInt = Integer.parseInt(idActuador);
 		Integer valor = this.arduino.leerActuador(idActuadorInt.intValue());
-		return Json.createObjectBuilder().add("idActuador", idActuadorInt).add("valor", valor).build();
+		return Json.createObjectBuilder().add("idActuador", idActuadorInt.toString())
+				.add("valor", valor.toString()).build();
 	}
 
 }

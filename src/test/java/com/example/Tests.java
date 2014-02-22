@@ -4,7 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation.Builder;
+import javax.ws.rs.core.MediaType;
 
 import org.junit.Test;
 
@@ -29,17 +34,25 @@ public class Tests extends BaseTest {
 
 	@Test
 	public void testEscrituraActuador() {
-		String responseMsg = target.path("/actuador/12/valor").queryParam("value", "77").request()
-				.post(null, String.class);
 
-		Type type = new TypeToken<Map<String, String>>() {
+		final Type type = new TypeToken<Map<String, String>>() {
 		}.getType();
+
+		Builder builder = target.path("/actuador/12/valor").request();
+		builder.accept(MediaType.APPLICATION_JSON);
+
+		// json_encode(array('valor' => 44))
+		Map<String, String> src = new HashMap<String, String>();
+		src.put("valor", "123");
+		String jsonValue = new Gson().toJson(src, type);
+
+		String responseMsg = builder.post(Entity.json(jsonValue), String.class);
 
 		Map<String, String> obj = new Gson().fromJson(responseMsg, type);
 
 		assertEquals(obj.get("idActuador"), "12");
 		assertNotNull(obj.get("valor"));
-		assertEquals(Integer.parseInt(obj.get("valor")), 77);
+		assertEquals(123, Integer.parseInt(obj.get("valor")));
 
 	}
 }
