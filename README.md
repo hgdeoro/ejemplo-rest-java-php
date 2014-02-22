@@ -1,5 +1,11 @@
 # Ejemplo Java-PHP usando REST
 
+## Maven
+
+Para facilitar el tema de las dependencias, uso Maven. Para que Maven instale todas las dependencias, hay que ejecutar:
+
+    mvn install
+
 ## Recursos
 
 + http://www.vogella.com/tutorials/REST/article.html
