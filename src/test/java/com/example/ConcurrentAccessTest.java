@@ -1,10 +1,13 @@
 package com.example;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,6 +20,9 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class ConcurrentAccessTest {
 
@@ -59,6 +65,11 @@ public class ConcurrentAccessTest {
 		final AtomicInteger threadsFinalizadosOk = new AtomicInteger();
 		final Semaphore semaphore = new Semaphore(0);
 
+		final Type type = new TypeToken<Map<String, String>>() {
+		}.getType();
+
+		final Gson gson = new Gson();
+
 		for (int i = 0; i < 30; i++) {
 			threads.add(new Thread(new Runnable() {
 
@@ -81,7 +92,11 @@ public class ConcurrentAccessTest {
 					String responseMsg = target.path("/sensor/" + sensorId + "/valor").request()
 							.get(String.class);
 					log("Respuesta recibida");
-					assertTrue(responseMsg.contains("Lectura de sensor '" + sensorId + "' devolvio"));
+
+					Map<String, String> obj = gson.fromJson(responseMsg, type);
+					assertEquals(obj.get("idSensor"), "" + sensorId);
+					assertNotNull(obj.get("valor"));
+					Integer.parseInt(obj.get("valor"));
 
 					threadsFinalizadosOk.incrementAndGet();
 				}
