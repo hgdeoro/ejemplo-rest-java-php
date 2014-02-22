@@ -6,8 +6,16 @@ use Guzzle\Http\Client;
 
 $client = new Client('http://localhost:8080');
 
-$request = $client->post('/tesis/actuador/32/valor?value=77');
-// echo $request->getUrl();
+// -- ORIGINAL: sin json
+// $request = $client->post('/tesis/actuador/32/valor?value=77');
+
+// -- ALTERNATIVA: no funciono
+//$request = $client->post('/tesis/actuador/32/valor', null, array(
+//	'valor' => 44
+//));
+
+$request = $client->post('/tesis/actuador/32/valor');
+$request->setBody(json_encode(array('valor' => 44)), 'application/json');
 
 // You must send a request in order for the transfer to occur
 $response = $request->send();
