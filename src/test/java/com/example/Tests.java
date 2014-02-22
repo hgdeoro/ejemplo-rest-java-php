@@ -8,7 +8,7 @@ public class Tests extends BaseTest {
 
 	@Test
 	public void testLecturaSensor() {
-		String responseMsg = target.path("/sensor/33/leer").request().get(String.class);
+		String responseMsg = target.path("/sensor/33/valor").request().get(String.class);
 		assertTrue(responseMsg.contains("Lectura de sensor '33' devolvio"));
 	}
 

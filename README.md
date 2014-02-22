@@ -9,7 +9,7 @@
 
 #### Para leer valor: GET
 
-+ http://localhost:8080/tesis/sensor/32/leer
++ http://localhost:8080/tesis/sensor/32/valor
 
 #### Para escribir valor: POST
 

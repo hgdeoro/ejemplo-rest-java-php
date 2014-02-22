@@ -19,11 +19,12 @@ public class Sensor {
 	}
 
 	@GET
-	@Path("/leer")
+	@Path("/valor")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String leerSensor(@PathParam("id_sensor") String idSensor) {
 		Integer idSensorInt = Integer.parseInt(idSensor);
-		return "Lectura de sensor '" + idSensor + "' devolvio: " + this.arduino.leerTemperatura(idSensorInt.intValue());
+		return "Lectura de sensor '" + idSensor + "' devolvio: "
+				+ this.arduino.leerTemperatura(idSensorInt.intValue());
 	}
 
 }

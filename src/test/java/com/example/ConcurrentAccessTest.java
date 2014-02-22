@@ -76,7 +76,7 @@ public class ConcurrentAccessTest {
 					}
 
 					log("Enviando request...");
-					String responseMsg = target.path("/sensor/" + sensorId + "/leer").request()
+					String responseMsg = target.path("/sensor/" + sensorId + "/valor").request()
 							.get(String.class);
 					log("Respuesta recibida");
 					assertTrue(responseMsg.contains("Lectura de sensor '" + sensorId + "' devolvio"));

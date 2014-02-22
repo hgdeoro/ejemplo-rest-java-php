@@ -21,7 +21,6 @@ public class Actuador {
 	}
 
 	@POST
-	// @Path("/escribir")
 	@Path("/valor")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String escribirEnActuador(@PathParam("id_actaudor") String idActuador,
