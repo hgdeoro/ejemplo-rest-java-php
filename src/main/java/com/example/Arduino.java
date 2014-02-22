@@ -24,11 +24,11 @@ public class Arduino {
 		}
 	}
 
-	public int escribir(int pin, int valor) {
+	public void escribir(int pin, int valor) {
 		try {
 			LOCK.lock();
 			this.simularOperacionConAndroid();
-			return new Random().nextInt();
+			return;
 		} finally {
 			LOCK.unlock();
 		}

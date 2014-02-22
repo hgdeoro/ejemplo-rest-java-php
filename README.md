@@ -7,5 +7,12 @@
 
 ## URLs para acceder con el navegador
 
-+ http://localhost:8080/myapp/sensor/32/leer
+#### Para leer valor: GET
+
++ http://localhost:8080/tesis/sensor/32/leer
+
+#### Para escribir valor: POST
+
+wget --no-proxy --post-data '' -S -q -O - 'http://localhost:8080/tesis/sensor/32/escribir?value=77' ; echo ""
+
 
