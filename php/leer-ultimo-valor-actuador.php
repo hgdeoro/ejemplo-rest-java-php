@@ -12,7 +12,12 @@ $request = $client->get('/tesis/actuador/32/valor');
 // You must send a request in order for the transfer to occur
 $response = $request->send();
 
-echo $response->getBody() . "\n";
+echo "Respuesta del servidor: " . $response->getBody() . "\n";
+
+$obj = json_decode($response->getBody());
+
+echo " - Actuador: " . $obj->idActuador . "\n";
+echo " - Valor: " . $obj->valor . "\n";
 
 // $data = $response->json();
 // echo $data['type'];
