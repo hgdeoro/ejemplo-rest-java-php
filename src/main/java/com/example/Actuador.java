@@ -26,7 +26,7 @@ public class Actuador {
 			@QueryParam("value") String value) {
 		Integer idActuadorInt = Integer.parseInt(idActuador);
 		Integer valueInt = Integer.parseInt(value);
-		this.arduino.escribir(idActuadorInt.intValue(), valueInt.intValue());
+		this.arduino.cambiarActuador(idActuadorInt.intValue(), valueInt.intValue());
 		return "Escritura del valor '" + value + "' en actuador '" + idActuador + "': OK";
 	}
 }
