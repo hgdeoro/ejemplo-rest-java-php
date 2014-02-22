@@ -12,7 +12,7 @@ $request = $client->post('/tesis/actuador/32/valor?value=77');
 // You must send a request in order for the transfer to occur
 $response = $request->send();
 
-echo $response->getBody();
+echo $response->getBody() . "\n";
 
 // $data = $response->json();
 // echo $data['type'];
