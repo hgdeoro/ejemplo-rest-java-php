@@ -14,7 +14,7 @@ public class Tests extends BaseTest {
 
 	@Test
 	public void testEscrituraSensor() {
-		String responseMsg = target.path("/actuador/12/escribir").queryParam("value", "77").request()
+		String responseMsg = target.path("/actuador/12/valor").queryParam("value", "77").request()
 				.post(null, String.class);
 		assertTrue(responseMsg.contains("Escritura del valor '77' en actuador '12': OK"));
 	}

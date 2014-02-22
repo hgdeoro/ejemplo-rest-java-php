@@ -1,5 +1,6 @@
 package com.example;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -20,7 +21,8 @@ public class Actuador {
 	}
 
 	@POST
-	@Path("/escribir")
+	// @Path("/escribir")
+	@Path("/valor")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String escribirEnActuador(@PathParam("id_actaudor") String idActuador,
 			@QueryParam("value") String value) {
@@ -29,4 +31,14 @@ public class Actuador {
 		this.arduino.cambiarActuador(idActuadorInt.intValue(), valueInt.intValue());
 		return "Escritura del valor '" + value + "' en actuador '" + idActuador + "': OK";
 	}
+
+	@GET
+	@Path("/valor")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String obtenerValorDeActuador(@PathParam("id_actaudor") String idActuador) {
+		Integer idActuadorInt = Integer.parseInt(idActuador);
+		Integer valor = this.arduino.leerActuador(idActuadorInt.intValue());
+		return "El valor del actuador '" + idActuador + "' es: " + valor;
+	}
+
 }
