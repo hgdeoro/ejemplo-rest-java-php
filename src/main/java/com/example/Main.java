@@ -35,7 +35,7 @@ public class Main {
 		final ResourceConfig rc = new ResourceConfig();
 
 		// rc.packages("com.example");
-		rc.registerInstances(new Sensor(ARDUINO_SINGLETON));
+		rc.registerInstances(new Sensor(ARDUINO_SINGLETON), new Actuador(ARDUINO_SINGLETON));
 
 		// create and start a new instance of grizzly http server
 		// exposing the Jersey application at BASE_URI

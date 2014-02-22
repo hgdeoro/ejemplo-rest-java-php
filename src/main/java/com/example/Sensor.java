@@ -28,13 +28,4 @@ public class Sensor {
 		return "Lectura de sensor '" + idSensor + "' devolvio: " + this.arduino.leer(idSensorInt.intValue());
 	}
 
-	@POST
-	@Path("/escribir")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String escribirEnSensor(@PathParam("id_sensor") String idSensor, @QueryParam("value") String value) {
-		Integer idSensorInt = Integer.parseInt(idSensor);
-		Integer valueInt = Integer.parseInt(value);
-		this.arduino.escribir(idSensorInt.intValue(), valueInt.intValue());
-		return "Escritura del valor '" + value + "' en sensor sensor '" + idSensor + "': OK";
-	}
 }

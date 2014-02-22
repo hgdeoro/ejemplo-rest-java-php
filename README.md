@@ -13,6 +13,5 @@
 
 #### Para escribir valor: POST
 
-wget --no-proxy --post-data '' -S -q -O - 'http://localhost:8080/tesis/sensor/32/escribir?value=77' ; echo ""
-
+    wget -q --no-proxy --post-data '' -S -O - 'http://localhost:8080/tesis/actuador/32/escribir?value=77' ; echo ""
 

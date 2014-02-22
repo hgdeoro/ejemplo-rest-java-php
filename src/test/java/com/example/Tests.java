@@ -12,7 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SensorTest {
+public class Tests {
 
 	private HttpServer server;
 	private WebTarget target;
@@ -48,9 +48,8 @@ public class SensorTest {
 
 	@Test
 	public void testEscrituraSensor() {
-		String responseMsg = target.path("/sensor/32/escribir").queryParam("value", "77").request()
+		String responseMsg = target.path("/actuador/12/escribir").queryParam("value", "77").request()
 				.post(null, String.class);
-
-		assertTrue(responseMsg.contains("Escritura del valor '77' en sensor sensor '32': OK"));
+		assertTrue(responseMsg.contains("Escritura del valor '77' en actuador '12': OK"));
 	}
 }
