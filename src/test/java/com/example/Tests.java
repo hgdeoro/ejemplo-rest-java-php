@@ -34,6 +34,7 @@ public class Tests {
 		target = c.target(Main.BASE_URI);
 	}
 
+	@SuppressWarnings("deprecation")
 	@After
 	public void tearDown() throws Exception {
 		server.stop();
