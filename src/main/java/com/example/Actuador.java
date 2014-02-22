@@ -1,5 +1,7 @@
 package com.example;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -33,11 +35,12 @@ public class Actuador {
 
 	@GET
 	@Path("/valor")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String obtenerValorDeActuador(@PathParam("id_actaudor") String idActuador) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public JsonObject obtenerValorDeActuador(@PathParam("id_actaudor") String idActuador) {
 		Integer idActuadorInt = Integer.parseInt(idActuador);
 		Integer valor = this.arduino.leerActuador(idActuadorInt.intValue());
-		return "El valor del actuador '" + idActuador + "' es: " + valor;
+
+		return Json.createObjectBuilder().add("idActuador", idActuadorInt).add("valor", valor).build();
 	}
 
 }
